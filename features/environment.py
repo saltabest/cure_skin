@@ -4,19 +4,20 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from selenium.webdriver.support.wait import WebDriverWait
 
+from features.app.application import Application
+
 
 def browser_init(context):
-    """
-    :param context: Behave context
-    """
     driver_path = ChromeDriverManager().install()
+    # context.driver = webdriver.Firefox(executable_path= r'C:\Users\Eugene\project\cure_skin\geckodriver-v0.33.0-win64')
+    # context.driver = webdriver.Safari()
     service = Service(driver_path)
     context.driver = webdriver.Chrome(service=service)
 
     context.driver.maximize_window()
     context.driver.wait = WebDriverWait(context.driver, 10)
-
     context.driver.implicitly_wait(4)
+    context.app = Application(context.driver)
 
 
 def before_scenario(context, scenario):
@@ -33,6 +34,6 @@ def after_step(context, step):
         print('\nStep failed: ', step)
 
 
-def after_scenario(context, feature)
+def after_scenario(context, feature):
     context.driver.delete_all_cookies()
     context.driver.quit()
