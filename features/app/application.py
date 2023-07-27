@@ -11,3 +11,4 @@ class Application:
         self.driver = driver
         self.main_page = MainPage(self.driver)
 
+

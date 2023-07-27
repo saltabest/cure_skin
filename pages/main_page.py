@@ -9,8 +9,9 @@ from pages.base_page import Page
 class MainPage(Page):
     POP_UP_CLOSE = (By.XPATH, "//button[@class='popup-close']")
     ADD_BTN = (By.XPATH, "//add-to-cart[@class='w-full button button--small']")
-    CART_BTN = (By.XPATH, "//svg[@class='bi bi-bag']")
+    CART_BTN = (By.XPATH, "//summary[@class='header__icon focus-inset']")
     VIEW_MY_CART = (By.CSS_SELECTOR, '#cart-icon-bubble')
+    YOUR_CART = ()
 
 
     def open_main(self):

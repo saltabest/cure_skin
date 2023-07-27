@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -8,16 +10,27 @@ from features.app.application import Application
 
 
 def browser_init(context):
-    driver_path = ChromeDriverManager().install()
+    # driver_path = ChromeDriverManager().install()
+    # service = Service(driver_path)
+    # context.driver = webdriver.Chrome(service=service)
     # context.driver = webdriver.Firefox(executable_path= r'C:\Users\Eugene\project\cure_skin\geckodriver-v0.33.0-win64')
     # context.driver = webdriver.Safari()
-    service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
 
     context.driver.maximize_window()
     context.driver.wait = WebDriverWait(context.driver, 10)
     context.driver.implicitly_wait(4)
     context.app = Application(context.driver)
+
+    #### HEADLESS MODE ####
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument("--window-size=1920,1080")
+    context.driver = webdriver.Chrome(
+        chrome_options=options,
+        service=service
+    )
 
 
 def before_scenario(context, scenario):
