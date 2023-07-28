@@ -7,5 +7,5 @@ Feature: User can add a product to a cart
   And Close window
   And Click to add product to cart
 #  And Click cart icon
-#  And Click "View my cart" on icon page
+#  When Click "View my cart" on icon page
 #  Then Verify user is taken to the cart page
